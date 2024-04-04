@@ -1,0 +1,331 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <title>Donation website &mdash; Website Donation</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Free-Template.co" />
+    <link rel="shortcut icon" href="ftco-32x32.png">
+
+    <link rel="stylesheet" th:href="@{/user/assets/css/custom-bs.css}">
+    <link rel="stylesheet" th:href="@{/user/assets/css/jquery.fancybox.min.css}">
+    <link rel="stylesheet" th:href="@{/user/assets/css/bootstrap-select.min.css}">
+    <link rel="stylesheet" th:href="@{/user/assets/fonts/icomoon/style.css}">
+    <link rel="stylesheet" th:href="@{/user/assets/fonts/line-icons/style.css}">
+    <link rel="stylesheet" th:href="@{/user/assets/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/user/assets/css/animate.min.css}">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" th:href="@{/user/assets/css/style.css}">
+
+    <script th:src="@{/user/assets/js/jquery.min.js}"></script>
+    <script th:src="@{/user/assets/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/user/assets/js/isotope.pkgd.min.js}"></script>
+    <script th:src="@{/user/assets/js/stickyfill.min.js}"></script>
+    <script th:src="@{/user/assets/js/jquery.fancybox.min.js}"></script>
+    <script th:src="@{/user/assets/js/jquery.easing.1.3.js}"></script>
+
+    <script th:src="@{/user/assets/js/jquery.waypoints.min.js}"></script>
+    <script th:src="@{/user/assets/js/jquery.animateNumber.min.js}"></script>
+    <script th:src="@{/user/assets/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/user/assets/js/bootstrap-select.min.js}"></script>
+    <script th:src="@{/user/assets/js/custom.js}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
+</head>
+
+<body id="top">
+
+<div id="overlayer"></div>
+<div class="loader">
+    <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<div th:if="${msg}" class="toast" data-delay="1000"
+     style="position:fixed; top: 100PX; left: 40PX;z-index: 2000;width: 300px">
+    <script>
+         swal({
+             title: 'Donate Successfully!',
+             text: 'Redirecting...',
+             icon: 'success',
+             timer: 3000,
+             buttons: true,
+             type: 'success'
+         })
+    </script>
+</div>
+
+<div class="site-wrap">
+    <div class="site-mobile-menu site-navbar-target">
+        <div class="site-mobile-menu-header">
+            <div class="site-mobile-menu-close mt-3">
+                <span class="icon-close2 js-menu-toggle"></span>
+            </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
+
+    <!-- NAVBAR -->
+    <header class="site-navbar mt-3">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="site-logo col-6"><a th:href="@{/ql-user/interface}">&#8592;&#8592;Quay về trang chủ</a></div>
+
+            </div>
+          </div>
+    </header>
+    <!-- HOME -->
+    <section class="section-hero overlay inner-page bg-image"
+             style="background-image: url('/user/assets/images/hero_1.jpg');"
+             id="home-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h1 class="text-white font-weight-bold">Danh sách các đợt quyên góp</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+<!--Category of Donation-->
+    <section class="site-section">
+        <div class="container">
+            <div class="row mb-5 justify-content-center">
+                <div class="col-md-7 text-center">
+                    <h2 class="section-title mb-2" >Các đợt quyên góp</h2>
+                </div>
+            </div>
+            <div class="job-listings mb-5" >
+                <th:block th:each="category:${donations}">
+                    <a th:href="'/user-donation/detail-for-donate?id=' + ${category.id}"
+                       style="text-decoration: none;" th:if="${category.status!=4}">
+                    <div style="margin-bottom: 20px" class="job-listing d-block pb-3 pb-sm-0 align-items-center" >
+                        <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4" >
+                            <div class="job-listing-position custom-width  mb-3 mb-sm-0"
+                                 style="padding: 10px;width: 250px" >
+                                <h2 th:text="${category.name}"></h2>
+                                <strong th:switch="${category.status}">
+                                    <p th:case="0" style="color: green;font-weight: bold">Mới tạo đợt quyên góp</p>
+                                    <p th:case="1" style="color: blue;font-weight: bold">Đang quyên góp</p>
+                                    <p th:case="2" style="color: purple;font-weight: bold">Kết thúc quyên góp</p>
+                                    <p th:case="3" style="color: red;font-weight: bold">Đóng quyên góp</p>
+                                </strong>
+                            </div>
+                            <div class="job-listing-location mb-3 mb-sm-0 custom-width w-10" style="padding: 10px;">
+                                Ngày bắt đầu<br>
+                                <strong th:text="${category.startDate}"></strong><br>
+                            </div>
+                            <div class="job-listing-location mb-3 mb-sm-0 custom-width w-10" style="padding: 10px;">
+                                Ngày kết thúc<br>
+                                <strong th:text="${category.endDate}"></strong><br>
+                            </div>
+                            <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25" style="padding: 10px;">
+                                <i class="fas fa-map-marker-alt"></i> <span th:text="${category.organizationName}"></span><br>
+                                <strong th:text="${category.phoneNumber}"></strong><br>
+                            </div>
+                            <div class="job-listing-meta custom-width w-20" >
+                                <button id="btnDonate" type="button" style="margin-top: 20px" class="btn btn-primary py-2 btn-prevent"
+                                        data-bs-toggle="modal" th:if="${category.status==1}" th:data-bs-target="'#idModelDetail'+${category.id}">
+                                    Quyên góp</button>
+                                <p style="margin-top: 20px;background-color: white !important;" class="btn py-2"><span style="color: white">Quyên góp</span></p>
+                                <p style="margin-top: 20px;background-color: white !important;" class="btn py-2" th:if="${category.status!=1}"><span style="color:white">Quyên góp</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                    <!-- Modal -->
+                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                         aria-hidden="true" th:id="'idModelDetail'+${category.id}">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title mr-2 " id="exampleModalLabel" >Quyên góp:</h5>
+                                    <h5 th:text="${category.name}" class="modal-title font-italic font-weight-bold" id="exampleModalLabel"></h5>
+                                    <button type="button" class="btn btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close" >
+                                        <span>X</span>
+                                    </button>
+                                </div>
+                                <form method="post" th:object="${userDonation}"
+                                      th:action="@{/user-donation/save}">
+                                      <!--onsubmit="return validateForm()"-->
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label for="addName"
+                                                       class="col-form-label">Họ tên:</label>
+                                                <input type="text" class="form-control"
+                                                       id="addName" name="name" th:field="*{name}" placeholder="" required>
+                                                <label for="addMoney"
+                                                       class="col-form-label">Số tiền quyên góp:</label>
+                                                <input type="number" class="form-control" placeholder=""
+                                                       id="addMoney" name="money" th:field="*{money}" required>
+                                                <span id="errorMessage" style="color:red; font-size:12px; display:none;">Vui lòng nhập ít nhất 20000đ</span>
+                                                <input type="hidden" class="form-control" placeholder=""
+                                                       id="idShowPage" name="idShowPage" value="home" >
+                                                <input type="hidden" class="form-control" placeholder=""
+                                                       id="idDonation" name="idDonation" th:value="${category.id}" required>
+                                                <input type="hidden" class="form-control" placeholder=""
+                                                       id="idPageable" name="idPageable" th:value="${currentPage}">
+                                                <label for="addMessage"
+                                                       class="col-form-label">Lời nhắn:</label>
+                                                <textarea rows="10" cols="3" class="form-control" name="text"
+                                                id="addMessage" th:field="*{text}">
+                                                </textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                            <button type="submit" class="btn btn-primary">Quyên góp</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+                </th:block>
+            </div>
+
+            <div class="row pagination-wrap">
+                <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
+                </div>
+                <div class="col-md-6 text-center text-md-right">
+                    <div class="custom-pagination ml-auto">
+                        <a class="prev" th:href="@{'?pageNo='+${currentPage-1}}" th:if="${currentPage>1}">Prev</a>
+                        <a th:each="i:${#numbers.sequence(1,totalPages)}" th:text="${i}"
+                           th:href="@{'?pageNo='+${i}}" th:classappend="${currentPage == i ? 'active' : ''}"></a>
+                        <a class="next" th:href="@{'?pageNo='+${currentPage+1}}" th:if="${currentPage}<${totalPages}">Next</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Category of Donation-->
+    <!-- footer -->
+    <footer class="site-footer">
+        <div class="wrap-footer container">
+            <div class="row ">
+                <!-- Giới thiệu  -->
+                <div class="introduction-footer col-lg-3 col-md-6 pb-2">
+                    <div class="title-introduction-footer " style="color: beige">
+                        <strong>Giới thiệu</strong>
+                    </div>
+                    <div class="list-introduction-footer">
+                        <div>
+                            <div>
+                                <a href="#">Hỗ trợ</a>
+                            </div>
+                            <div>
+                                <a href="#">Bảo mật</a>
+                            </div>
+                            <div>
+                                <a href="#">Điều khoản & Dịch vụ</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Thông tin -->
+                <div class="information-footer col-lg-3 col-md-6 pb-2">
+                    <div class="title-information-footer" style="color: beige">
+                        <strong>Thông tin</strong>
+                    </div>
+                    <div class="list-information-footer">
+                        <div>
+                            <div>
+                                <a href="#">Đợt quyên góp</a>
+                            </div>
+                            <div>
+                                <a href="#">Nhà quyên góp</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Liên hệ -->
+                <div class="contact col-lg-3 col-md-6 pb-2">
+                    <div class="title-contact-footer" style="color: beige">
+                        <strong>Liên hệ</strong>
+                    </div>
+                    <div class="list-contact-footer">
+                        <div>
+                            <div>
+                                <a href="#">SĐT: 0936758961</a>
+                            </div>
+                            <div>
+                                <a href="#">Mạng xã hội: meocattom3</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Kết nối -->
+                <div class="connection col-lg-3 col-md-6 pb-2">
+                    <div class="title-connection-footer" style="color: beige">
+                        <strong>Kết nối</strong>
+                    </div>
+                    <div class="list-connection-footer">
+                        <div>
+                            <a class="fab fa-facebook"
+                               style="color: rgb(62, 178, 62); font-size: 30px; margin-right: 5px;"
+                               href="#"></a>
+                            <a class="fab fa-twitter"
+                               style="color: rgb(62, 178, 62); font-size: 30px; margin-right: 5px;"
+                               href="#"></a>
+                            <a class="fab fa-github"
+                               style="color: rgb(62, 178, 62); font-size: 30px; margin-right: 5px;"
+                               href="#"></a>
+                            <a class = "fab fa-linkedin"
+                               style="color: rgb(62, 178, 62); font-size: 30px; margin-right: 5px;"
+                               href="#"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-5 text-center small-text">
+            <div>
+                Copyright @2024 All rights reserved | This template is made with by
+                <i class="fas fa-heart" style="color: red;"></i>KhuongTM3
+            </div>
+        </div>
+    </footer>
+<!--     footer -->
+
+    <script>
+    var buttons = document.querySelectorAll('.btn-prevent');
+
+    buttons.forEach(function(button) {
+        button.addEventListener('click', function(eventc) {
+            event.preventDefault();
+        });
+    });
+    </script>
+    <script>
+    document.getElementById("addMoney").addEventListener("blur", function() {
+        if (this.value < 20000 || this.value.trim() === "") {
+            document.getElementById("errorMessage").style.display = "block";
+        } else {
+            document.getElementById("errorMessage").style.display = "none";
+        }
+    });
+    function validateForm() {
+        var inputValue = document.getElementById("addMoney").value;
+        if (inputValue < 20000||inputValue.trim()==="") {
+            document.getElementById("errorMessage").style.display = "block";
+            return false;
+        } else {
+            document.getElementById("errorMessage").style.display = "none";
+            return true;
+        }
+    }
+    </script>
+</div>
+</body>
+</html>
