@@ -13,4 +13,4 @@ WORKDIR /app
 COPY --from=build /app/target/assignment01-0.0.1-SNAPSHOT.jar charity-project.jar
 EXPOSE 8080
 
-ENTRYPOINT ["java","-jar","job-application-project.jar"]
+ENTRYPOINT ["java","-jar","charity-project.jar"]
