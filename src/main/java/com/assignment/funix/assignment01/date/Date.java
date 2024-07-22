@@ -1,4 +1,4 @@
-package com.assignment.funix.assignment01.Date;
+package com.assignment.funix.assignment01.date;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

@@ -2,8 +2,6 @@ package com.assignment.funix.assignment01.service.donation;
 
 import com.assignment.funix.assignment01.dao.DonationRepository;
 import com.assignment.funix.assignment01.entity.Donation;
-import com.assignment.funix.assignment01.entity.UserDonation;
-import com.assignment.funix.assignment01.service.donation.DonationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

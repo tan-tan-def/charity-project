@@ -1,6 +1,6 @@
 package com.assignment.funix.assignment01.controller;
 
-import com.assignment.funix.assignment01.Date.Date;
+import com.assignment.funix.assignment01.date.Date;
 import com.assignment.funix.assignment01.entity.Donation;
 import com.assignment.funix.assignment01.entity.UserDonation;
 import com.assignment.funix.assignment01.service.donation.DonationService;
