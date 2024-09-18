@@ -40,7 +40,7 @@
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
       <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"></nav>
       <!-- Navbar Brand-->
-      <a class="navbar-brand ps-3" href="/admin/">QUẢN TRỊ</a>
+      <a class="navbar-brand ps-3" >QUẢN TRỊ</a>
       <!-- Sidebar Toggle-->
       <button
         class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
@@ -57,12 +57,10 @@
       <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
         <li class="nav-item dropdown">
           <a
-            th:if="${session.admin}"
             class="nav-link dropdown-toggle"
-            href="/admin/logout"
+            th:href="@{/logout}"
             role="button"
-            ><i class="fas fa-user fa-fw"></i><span> Logout</span></a
-          >
+            ><i class="fas fa-user fa-fw"></i><span> Logout</span></a>
           <ul
             class="dropdown-menu dropdown-menu-end"
             aria-labelledby="navbarDropdown1"
@@ -72,7 +70,7 @@
             <li>
               <hr class="dropdown-divider" />
             </li>
-            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+            <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
           </ul>
         </li>
       </ul>
@@ -95,7 +93,7 @@
                 </div>
                 Quản lý đợt quyên góp
               </a>
-              <a class="nav-link" th:href="@{/ql-user/interface}">
+              <a class="nav-link" th:href="@{/}">
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Quay về trang chủ
               </a>

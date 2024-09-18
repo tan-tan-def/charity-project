@@ -1,0 +1,86 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.register-container {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+    max-width: 500px;
+    width: 100%;
+}
+h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.form-group input:focus {
+    border-color: #0056b3;
+    outline: none;
+}
+.form-group button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0056b3;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+.form-group button:hover {
+    background-color: #004494;
+}
+.form-group .message {
+    text-align: center;
+    margin-top: 10px;
+}
+.text-danger {
+    color: red;
+    font-size: 0.8rem;
+}
+select {
+    font-size: 1rem; /* Cỡ chữ cho dropdown */
+    padding: 0.75rem 1rem; /* Khoảng cách trong dropdown */
+    border: 1px solid #ced4da; /* Đường viền */
+    border-radius: 0.375rem; /* Góc bo tròn */
+    background-color: #ffffff; /* Màu nền */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+    width: 100%; /* Đảm bảo dropdown chiếm toàn bộ chiều rộng của container */
+    max-width: 300px; /* Đặt chiều rộng tối đa */
+    display: block; /* Đảm bảo dropdown là một khối */
+    transition: border-color 0.2s ease-in-out; /* Hiệu ứng chuyển tiếp cho đường viền */
+}
+
+select:focus {
+    border-color: #80bdff; /* Đổi màu đường viền khi dropdown được chọn */
+    outline: none; /* Loại bỏ đường viền mặc định của trình duyệt */
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25); /* Đổ bóng khi chọn */
+}

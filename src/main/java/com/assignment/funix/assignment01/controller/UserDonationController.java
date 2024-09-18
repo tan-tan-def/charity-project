@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/user-donation")
 public class UserDonationController {
     private UserDonationService userDonationService;
     private DonationService donationService;
@@ -24,7 +23,7 @@ public class UserDonationController {
         this.userDonationService = userDonationService;
         this.donationService = donationService;
     }
-    @RequestMapping("/home")
+    @RequestMapping("/")
     public String home(Model theModel, HttpSession session,
                        @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo){
         //Pageable and show List of donation
@@ -42,7 +41,7 @@ public class UserDonationController {
         }
         return "public/home";
     }
-    @GetMapping("/detail-for-donate")
+    @GetMapping("/user-donation/detail-for-donate")
     public String detailForDonate(@RequestParam("id") int id, Model theModel, HttpSession session){
         //Find the donation to show
         Donation donation =  donationService.findById(id);
@@ -60,7 +59,7 @@ public class UserDonationController {
         }
         return "public/detail-for-donate";
     }
-    @PostMapping("/save")
+    @PostMapping("/user-donation/save")
     public String saveUserDonate(@ModelAttribute("userDonation") UserDonation userDonation,
                                  @RequestParam("idDonation") int id,
                                  @RequestParam("idShowPage") String idShowPage,

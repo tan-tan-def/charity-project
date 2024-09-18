@@ -23,14 +23,11 @@ public class UserController {
         this.userService = userService;
         this.roleService = roleService;
     }
-    @RequestMapping("/interface")
-    public String homeInterface(){
-        return "admin/main-interface";
-    }
-    @GetMapping("/home")
-    public String home(){
-        return "admin/home";
-    }
+//    @RequestMapping("/")
+//    public String homeInterface(){
+//        return "user/login";
+//    }
+
     @GetMapping("/account")
     public String account(Model theModel, HttpSession session){
         //The Attribute for the form

@@ -23,7 +23,10 @@ public class DonationController {
         this.userDonationService = userDonationService;
         this.donationService = donationService;
     }
-
+    @GetMapping("/main-page")
+    public String mainPage(){
+        return "admin/home";
+    }
     @RequestMapping("/home")
     public String donation(Model theModel, HttpSession session){
         theModel.addAttribute("newDonation", new Donation());

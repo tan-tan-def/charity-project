@@ -1,5 +1,6 @@
 package com.assignment.funix.assignment01.service.user;
 
+import com.assignment.funix.assignment01.dto.UserDTO;
 import com.assignment.funix.assignment01.entity.Donation;
 import com.assignment.funix.assignment01.entity.User;
 import org.springframework.data.domain.Page;
@@ -11,5 +12,6 @@ public interface UserService {
     User findById(int theId);
     User saveUser(User user);
     void deleteById(int theId);
-
+    User findByEmail(String email);
+    User register(UserDTO userDTO);
 }

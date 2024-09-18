@@ -1,5 +1,6 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security6">
 
 <head>
     <title>Donation website &mdash; Website Donation</title>
@@ -40,10 +41,10 @@
             crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
+
 </head>
 
 <body id="top">
-
 <div id="overlayer"></div>
 <div class="loader">
     <div class="spinner-border text-primary" role="status">
@@ -78,11 +79,36 @@
     <header class="site-navbar mt-3">
         <div class="container-fluid">
             <div class="row align-items-center">
-                <div class="site-logo col-6"><a th:href="@{/ql-user/interface}">&#8592;&#8592;Quay về trang chủ</a></div>
-
+                <div class="col-6">
+                    <a class="site-logo" th:href="@{/}" style="font-weight: bold; color: black;">Website quyên góp tiền từ thiện</a>
+                </div>
+                <div class="col-6 text-right">
+                    <!-- Hiển thị dropdown nếu người dùng đã đăng nhập -->
+                    <div sec:authorize="isAuthenticated()">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span sec:authentication="principal.fullName"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li sec:authorize="hasAuthority('USER')"><a class="dropdown-item" th:href="@{/}">Trang cá nhân</a></li>
+                                <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" th:href="@{/donation/main-page}">Trang cá nhân</a></li>
+                                <li>
+                                    <form th:action="@{/logout}" method="post" class="m-0">
+                                        <button type="submit" class="dropdown-item">Đăng xuất</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Hiển thị nút đăng nhập nếu người dùng chưa đăng nhập -->
+                    <div sec:authorize="!isAuthenticated()" class="btn btn-success">
+                        <a th:href="@{/login-page}" style="color: white; text-decoration: none;">Đăng Nhập</a>
+                    </div>
+                </div>
             </div>
-          </div>
+        </div>
     </header>
+
     <!-- HOME -->
     <section class="section-hero overlay inner-page bg-image"
              style="background-image: url('/user/assets/images/hero_1.jpg');"
@@ -198,9 +224,9 @@
             <div class="row pagination-wrap">
                 <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
                 </div>
-                <div class="col-md-6 text-center text-md-right">
+                <div class="col-md-6 text-center text-md-right" th:if="${totalPages>0}">
                     <div class="custom-pagination ml-auto">
-                        <a class="prev" th:href="@{'?pageNo='+${currentPage-1}}" th:if="${currentPage>1}">Prev</a>
+                        <a th:if="${currentPage>1}" class="prev" th:href="@{'?pageNo='+${currentPage-1}}" >Prev</a>
                         <a th:each="i:${#numbers.sequence(1,totalPages)}" th:text="${i}"
                            th:href="@{'?pageNo='+${i}}" th:classappend="${currentPage == i ? 'active' : ''}"></a>
                         <a class="next" th:href="@{'?pageNo='+${currentPage+1}}" th:if="${currentPage}<${totalPages}">Next</a>

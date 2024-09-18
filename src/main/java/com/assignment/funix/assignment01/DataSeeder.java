@@ -18,8 +18,8 @@ public class DataSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Role adminRole = new Role("Admin");
-        Role userRole = new Role("User");
+        Role adminRole = new Role("ADMIN");
+        Role userRole = new Role("USER");
         List<Role> roles = roleService.findAll();
         if(roles.isEmpty()){
             roleService.saveRole(adminRole);
